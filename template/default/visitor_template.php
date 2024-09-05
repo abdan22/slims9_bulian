@@ -1,9 +1,10 @@
 <?php
-/**
- * @Created by          : Waris Agung Widodo (ido.alit@gmail.com)
- * @Date                : 2020-01-03 08:49
- * @File name           : visitor_template.php
- */
+# @Author             : Waris Agung Widodo <user>
+# @Date               : 2018-01-25T10:25:29+07:00
+# @Filename           : _navbar.php
+# @Last modified by   : https://github.com/abdan22
+# @Last modified time : 2024-09-04T00:00:00+00:00
+# @What's New?        : Fix Library name on visitor check in
 
 $main_template_path = __DIR__ . '/login_template.inc.php';
 
@@ -75,7 +76,7 @@ if (isset($_GET['select_lang'])) {
             </form>
         </div>
         <div class="text-right">
-            <small class="text-grey-dark"><?= __('Powered by ')?> <code>SLiMS</code></small>
+            <small class="text-grey-dark">&copy; <?php echo date('Y'); ?> &mdash; <?php echo $sysconf['library_name']; ?></small>
         </div>
     </div>
     <div class="flex-1 hidden md:block">

@@ -1,10 +1,12 @@
 <?php
-# @Author: Waris Agung Widodo <user>
-# @Date:   2018-01-23T11:26:05+07:00
-# @Email:  ido.alit@gmail.com
-# @Filename: footer.php
-# @Last modified by:   user
-# @Last modified time: 2018-01-23T11:26:47+07:00
+# @Author             : Waris Agung Widodo <user>
+# @Date               : 2018-01-25T10:25:29+07:00
+# @Email              : ido.alit@gmail.com
+# @Filename           : _navbar.php
+# @Last modified by   : https://github.com/abdan22
+# @Last modified time : 2024-09-04T00:00:00+00:00
+# @What's New?        : Fix Library name on Footer
+
 ?>
 
 
@@ -37,7 +39,7 @@
                 <div class="mb-4"><?php echo $sysconf['library_name']; ?></div>
                 <ul class="list-reset">
                     <li><a class="text-light" href="index.php?p=libinfo"><?= __('Information'); ?></a></li>
-                    <li><a class="text-light" href="index.php?p=services"><?= __('Services'); ?></a></li>
+                    <li><a class="text-light" href="index.php?p=help"><?= __('Help'); ?></a></li>
                     <li><a class="text-light" href="index.php?p=librarian"><?= __('Librarian'); ?></a></li>
                     <li><a class="text-light" href="index.php?p=member"><?= __('Member Area'); ?></a></li>
                 </ul>
@@ -77,7 +79,7 @@
         </div>
         <hr>
         <div class="flex font-thin text-sm">
-            <p class="flex-1">&copy; <?php echo date('Y'); ?> &mdash; Senayan Developer Community</p>
+        <p class="flex-1">&copy; <?php echo date('Y'); ?> &mdash; <?php echo $sysconf['library_name']; ?></p>
             <div class="flex-1 text-right text-grey"><?= __('Powered by '); ?><code>SLiMS</code></div>
         </div>
     </div>

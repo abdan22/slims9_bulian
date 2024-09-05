@@ -1,10 +1,11 @@
 <?php
-# @Author: Waris Agung Widodo <user>
-# @Date:   2018-01-25T10:25:29+07:00
-# @Email:  ido.alit@gmail.com
-# @Filename: _navbar.php
-# @Last modified by:   user
-# @Last modified time: 2018-01-25T10:29:27+07:00
+# @Author             : Waris Agung Widodo <user>
+# @Date               : 2018-01-25T10:25:29+07:00
+# @Email              : ido.alit@gmail.com
+# @Filename           : _navbar.php
+# @Last modified by   : https://github.com/abdan22
+# @Last modified time : 2024-09-04T00:00:00+00:00
+# @What's New?        : Add checkin and login admin
 
 $main_menus = [
   'home' => [
@@ -26,6 +27,14 @@ $main_menus = [
   'librarian' => [
     'text' => __('Librarian'),
     'url' => 'index.php?p=librarian'
+  ],
+  'checkin' => [
+    'text' => __('Check In'),
+    'url' => 'index.php?p=visitor'
+  ],
+  'login' => [
+    'text' => __('Login Admin'),
+    'url' => 'index.php?p=login'
   ]
 ];
 ?>

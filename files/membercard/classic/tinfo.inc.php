@@ -1,4 +1,7 @@
 <?php
+# @Last modified by   : https://github.com/abdan22
+# @Last modified time : 2024-09-04T00:00:00+00:00
+# @What's New?        : Fix Member Card Bug & Error + QR Code
 
 //image background
 $extensions= array("jpeg","jpg","png","svg","gif");
@@ -78,6 +81,10 @@ $sysconf['print'][$theme_key] = [
     'label' => __('Rules'),
     'type' => 'ckeditor',
     'default' => $sysconf['print'][$theme_key]['rules'],
+    'default' => $sysconf['print'][$theme_key]['rules'],
+    'width' => '100',
+    'class' => 'ckeditor',
+    'max' => 100
   ],
     'f_color' => [
     'dbfield' => 'data[f_color]',
@@ -127,11 +134,27 @@ $sysconf['print'][$theme_key] = [
     'type' => 'text',
     'default' => $sysconf['print'][$theme_key]['officials_id']
   ], 
+  'front_side_image' => [
+    'dbfield' => 'data[front_side_image]',
+    'label' => __('Front Side Image'),
+    'type' => 'dropdown',
+    'default' => $sysconf['print'][$theme_key]['front_side_image'],
+    'width' => '40',
+    'data' => json_decode(json_encode($img),true)
+  ], 
   'back_side_image' => [
     'dbfield' => 'data[back_side_image]',
     'label' => __('Back Side Image'),
     'type' => 'dropdown',
     'default' => $sysconf['print'][$theme_key]['back_side_image'],
+    'width' => '40',
+    'data' => json_decode(json_encode($img),true)
+  ],  
+  'logo' => [
+    'dbfield' => 'data[logo]',
+    'label' => __('Logo'),
+    'type' => 'dropdown',
+    'default' => $sysconf['print'][$theme_key]['logo'],
     'width' => '40',
     'data' => json_decode(json_encode($img),true)
   ]

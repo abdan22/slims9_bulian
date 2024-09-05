@@ -1,4 +1,8 @@
 <?php
+# @Last modified by   : https://github.com/abdan22
+# @Last modified time : 2024-09-04T00:00:00+00:00
+# @What's New?        : Fix Member Card Bug & Error + QR Code
+
 function floatvalue($val){
   $val = str_replace(",",".",$val);
   $val = preg_replace('/\.(?=.*\.)/', '', $val);
@@ -158,11 +162,11 @@ strong {
 
 .code {
   position: absolute;
-  right: 10px;
+  right: -15px;
   bottom: 5px;
 }
 
-.barcode {
+/* .barcode {
   text-align: center;
   margin:0;
   height: 15px;
@@ -170,11 +174,16 @@ strong {
   width: 100px;
   border-top: solid 2px #fff;
   border-bottom: solid 2px #fff;
-}
+} */
 
 .barcode img {
   margin:0;
   width: <?php echo $sysconf['print']['membercard']['barcode_scale'] ?>%;
+}
+
+#front-card {
+  background: <?php echo $sysconf['print']['membercard']['b_color']??'#ffffff';  ?> url("<?php echo $card_path.'images/'.$sysconf['print']['membercard']['front_side_image'] ?>") center center no-repeat;
+  background-size: cover;
 }
 
 #back-card {
@@ -237,17 +246,21 @@ strong {
   display: inline-block;
 }
 
+.d-none {
+    display: none;
+}
+
 @media print {
   .print_btn {
     display: none;
-  }  
+  }
 }
 </style>
 </head>
 <body>
 <a class="print_btn" href="#" onclick="window.print()"><?php echo __('Print Again') ?></a>
 <table cellpadding="0" cellspacing="0">
-  <?php foreach ($chunked_card_arrays as $membercard_rows) : ?>
+  <?php foreach ($chunked_card_arrays as $index => $membercard_rows) : ?>
   <tr>
     <?php foreach ($membercard_rows as $card) : ?>
     <td>
@@ -289,9 +302,16 @@ strong {
             <?php endif ?>
             <div class="code">
               <div class="expired">Exp. <strong><?php echo $card['expire_date'] ?></strong></div>
+
+              <!-- Qrcode landing -->
+              <div id="Qrcode<?= $index ?>"></div>
               <div class="barcode">
-                <img src="<?php echo SWB.IMG.'/barcodes/'.str_replace(array(' '), '_', $card['member_id']) ?>.png" alt="No  Barcode">
+                <img id="qrcode<?= $index ?>" data-code="<?= $card['member_id'] ?>" style="width: 65%;"/>
               </div>
+
+              <!-- <div class="barcode">
+                <img src="<?php echo SWB.IMG.'/barcodes/'.str_replace(array(' '), '_', $card['member_id']) ?>.png" alt="No  Barcode">
+              </div> -->
             </div>
           </div>
         </div>
@@ -331,8 +351,26 @@ strong {
   <?php endforeach ?>
 </table>
 
+<script src="./membercard/<?= basename(__DIR__) ?>/qrcode.min.js"></script>
 <script type="text/javascript">
   self.print();
+
+  let doc = document
+  // QRcode instance
+  function creatQr(imgSelector,divSelector)
+  {
+      new QRCode(divSelector, {
+          text: imgSelector.dataset.code,
+          render: "canvas",  //Rendering mode specifies canvas mode
+      })
+      let canvas = divSelector.children[0];
+      imgSelector.setAttribute('src', canvas.toDataURL("image/png"))
+      divSelector.classList.add('d-none')
+  }
+  // setup for qrcode
+  <?php for ($r = 0; $r < count($chunked_card_arrays); $r++): ?>
+    creatQr(doc.querySelector('#qrcode<?= $r ?>'), doc.querySelector('#Qrcode<?= $r ?>'))
+  <?php endfor; ?>
 </script>
 
 </body>
